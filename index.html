@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Глобальный Чат</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="chat-container">
+        <h2>💬 Глобальный Чат</h2>
+
+        <div id="messages"></div>
+
+        <form id="message-form">
+            <input type="text" id="message-input" placeholder="Введите сообщение..." autocomplete="off" required />
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+<script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
