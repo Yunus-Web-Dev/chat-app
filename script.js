@@ -2,7 +2,7 @@
 
 // Подключаемся к тому же хосту и пути
 const socket = io({
-  path: "./api/socket"
+  path: "/api/socket"
 });
 
 const form = document.getElementById("message-form");
