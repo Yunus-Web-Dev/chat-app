@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
 // Подключаемся к тому же хосту и пути
-const socket = io("/", {
+const socket = io({
   path: "./api/socket"
 });
 
