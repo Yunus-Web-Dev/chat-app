@@ -1,36 +1,26 @@
-const socket = io();
+import { io } from "socket.io-client";
 
-const form = document.getElementById('message-form');
-const input = document.getElementById('message-input');
-const messages = document.getElementById('messages');
+// Подключаемся к тому же хосту и пути
+const socket = io("/", {
+  path: "./api/socket"
+});
 
-// Ник пользователя
-const username = prompt("Введите ваше имя") || "Гость";
+const form = document.getElementById("message-form");
+const input = document.getElementById("message-input");
+const messages = document.getElementById("messages");
 
-// Отправка сообщения
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
   const text = input.value.trim();
-  if (text !== '') {
-    const message = {
-      user: username,
-      text: text,
-      time: new Date().toLocaleTimeString()
-    };
-    socket.emit('chat message', message);
-    input.value = '';
+  if (text) {
+    socket.emit("chat message", text);
+    input.value = "";
   }
 });
 
-// Получение сообщения
-socket.on('chat message', function (msg) {
-  addMessage(msg);
-});
-
-// Отображение в чате
-function addMessage({ user, text, time }) {
-  const messageElement = document.createElement('div');
-  messageElement.innerHTML = `<strong>${user}</strong> <span style="opacity: 0.6; font-size: 0.8em">[${time}]</span>: ${text}`;
+socket.on("chat message", (msg) => {
+  const messageElement = document.createElement("div");
+  messageElement.textContent = msg;
   messages.appendChild(messageElement);
   messages.scrollTop = messages.scrollHeight;
-}
+});
